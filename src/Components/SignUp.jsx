@@ -25,7 +25,7 @@ const SignUp = () => {
           lastLogInTime,
         };
         //send data to the server
-        fetch("http://localhost:5000/users", {
+        fetch("https://coffee-store-server-two-henna.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

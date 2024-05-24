@@ -16,7 +16,7 @@ const UpdateUser = () => {
     };
 
     //send data to the server
-    fetch(`http://localhost:5000/users/${_id}`, {
+    fetch(`https://coffee-store-server-two-henna.vercel.app/users/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

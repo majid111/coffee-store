@@ -1,11 +1,22 @@
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider/AuthProvider";
 
 const SignIn = () => {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, signInGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location =useLocation();
+  const location = useLocation();
+
+  const handleGoogleSignIn = () => {
+    signInGoogle()
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -23,7 +34,7 @@ const SignIn = () => {
         };
 
         //update/patch
-        fetch("http://localhost:5000/users", {
+        fetch("https://coffee-store-server-two-henna.vercel.app/users", {
           method: "PATCH",
           headers: {
             "content-type": "application/json",
@@ -34,7 +45,7 @@ const SignIn = () => {
           .then((data) => {
             console.log(data);
           });
-          navigate(location?.state ? location.state : '/');
+        navigate(location?.state ? location.state : "/");
       })
       .catch((error) => console.log(error));
   };
@@ -80,6 +91,16 @@ const SignIn = () => {
             </div>
           </form>
           <div>
+            <div className="flex gap-3 mx-auto justify-around">
+              <button onClick={handleGoogleSignIn} className="btn btn-outline">
+                <FaGoogle />
+                Google
+              </button>
+              <button className="btn btn-outline">
+                <FaGithub />
+                Github
+              </button>
+            </div>
             <p className="text-center">
               New here? please
               <Link to="/signUp">
